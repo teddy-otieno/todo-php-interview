@@ -1,23 +1,18 @@
 import 'dart:convert';
+import 'dart:developer';
+import 'package:fpdart/fpdart.dart';
 
 import 'package:todo_mobile/models/Todo.dart';
 import 'package:todo_mobile/utils.dart';
 
 class TodoService {
-  Future<List<Todo>> listTodos() async {
-    var response = await client.get(makeUri('/api/todos'));
-
-    var body = jsonDecode(response.body);
-
-    return List<Todo>.from(body.map((x) => Todo.fromJson(x)));
+  TaskEither<Error, List<Todo>> listTodos() {
+    return httpGet('/api/todos',
+        (data) => List<Todo>.from(data.map((x) => Todo.fromJson(x))));
   }
 
-  Future<Todo> getTodo(int id) async {
-    var response = await client.get(makeUri('/api/todos/${id}'));
-
-    var body = jsonDecode(response.body);
-
-    return Todo.fromJson(body);
+  TaskEither<Error, Todo> getTodo(int id) {
+    return httpGet('/api/todos/${id}', Todo.fromJson);
   }
 
   Future<Todo> addTodo(NewTodo newTodo) async {

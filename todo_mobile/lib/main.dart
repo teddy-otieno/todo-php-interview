@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:todo_mobile/add_todo.dart';
 import 'package:todo_mobile/models/Todo.dart';
@@ -47,7 +49,13 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void loadTodos() async {
-    todos = await todoService.listTodos();
+    await todoService.listTodos().match((e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.message)));
+      return e;
+    }, (d) {
+      todos = d;
+    }).run();
   }
 
   void deleteTodo(int id) async {}

@@ -24,17 +24,26 @@ class _AddTodoState extends State<AddTodo> {
       ),
       body: Column(
         children: [
-          TextField(
-              controller: _titleController,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(), label: Text('title'))),
-          TextField(
-              controller: _descriptionController,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(), label: Text('decoration'))),
-          SizedBox(
-            width: double.infinity,
-            child: FilledButton(onPressed: () {}, child: Text('Create Task')),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+                controller: _titleController,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(), label: Text('title'))),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+                controller: _descriptionController,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(), label: Text('decoration'))),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              width: double.infinity,
+              child: FilledButton(onPressed: () {}, child: Text('Create Task')),
+            ),
           )
         ],
       ),

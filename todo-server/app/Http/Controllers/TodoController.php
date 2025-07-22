@@ -16,14 +16,9 @@ class TodoController extends Controller
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            "title" => "required|string",
-            "email" => "required|string",
-        ]);
+        $todo = Todo::create($request->input());
 
-        $todo = Todo::create($validatedData);
-
-        return response()->json([$todo]);
+        return response()->json($todo, 201);
     }
 
     public function show($id)
@@ -35,12 +30,7 @@ class TodoController extends Controller
 
     public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            "title" => "required|string",
-            "email" => "required|string",
-        ]);
-
-        $todo = Todo::findOrNew($id)->update($validatedData);
+        $todo = Todo::findOrNew($id)->update($request->input());
 
         return response()->json([$todo]);
     }

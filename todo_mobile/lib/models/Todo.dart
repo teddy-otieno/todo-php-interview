@@ -1,27 +1,29 @@
+import 'package:json_annotation/json_annotation.dart';
+import 'package:json_serializable/json_serializable.dart';
+
+part 'Todo.g.dart';
+
+@JsonSerializable()
 class Todo {
   int id;
   String title;
   String description;
-  DateTime createdAt;
-  DateTime updatedAt;
+  DateTime created_at;
+  DateTime updated_at;
 
   Todo(
       {required this.id,
       required this.title,
       required this.description,
-      required this.createdAt,
-      required this.updatedAt});
+      required this.created_at,
+      required this.updated_at});
 
   factory Todo.fromJson(dynamic json) {
-    return Todo(
-        id: json['id'],
-        title: json["title"],
-        description: json['description'],
-        createdAt: json['updatedAt'],
-        updatedAt: json['createdAt']);
+    return _$TodoFromJson(json);
   }
 }
 
+@JsonSerializable()
 class NewTodo {
   String title;
   String description;
@@ -29,6 +31,6 @@ class NewTodo {
   NewTodo({required this.title, required this.description});
 
   Map<String, dynamic> toJson() {
-    return {"title": title, "description": description};
+    return _$NewTodoToJson(this);
   }
 }
