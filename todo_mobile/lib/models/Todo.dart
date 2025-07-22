@@ -21,3 +21,14 @@ class Todo {
         updatedAt: json['createdAt']);
   }
 }
+
+class NewTodo {
+  String title;
+  String description;
+
+  NewTodo({required this.title, required this.description});
+
+  Map<String, dynamic> toJson() {
+    return {"title": title, "description": description};
+  }
+}

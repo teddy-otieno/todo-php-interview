@@ -19,4 +19,13 @@ class TodoService {
 
     return Todo.fromJson(body);
   }
+
+  Future<Todo> addTodo(NewTodo newTodo) async {
+    var response = await client.post(makeUri("/api/todos/"),
+        body: jsonEncode(newTodo.toJson()));
+
+    var body = jsonDecode(response.body);
+
+    return Todo.fromJson(body);
+  }
 }
