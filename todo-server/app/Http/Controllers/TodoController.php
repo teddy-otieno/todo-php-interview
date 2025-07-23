@@ -9,7 +9,7 @@ class TodoController extends Controller
 {
     public function index()
     {
-        $todos = Todo::all();
+        $todos = Todo::query()->orderBy("created_at", "desc")->get();
 
         return response()->json($todos);
     }
